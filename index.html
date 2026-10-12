@@ -152,12 +152,12 @@ const SMARTD='\\bshell\\b|\\bspc\\b|cathay cineplex';
 const DEFAULT_CARDS = [
  {id:'uob_lady',name:"UOB Lady's Card",bank:'UOB',baseLocal:0.4,baseFcy:0.4,block:5,aggBonus:true,cycle:'calendar',stmtDay:1,held:true,options:{ladyCats:['dining']},
   pools:{ladyA:{name:"Lady's bonus category",cap:1000}},
-  rules:[{label:'Bonus category',catNot:{entertainment:{re:STREAMING,why:'streaming subscriptions are not in Lady\'s Entertainment MCCs (only bars 5813, cinemas 7832, ticketing 7922)'}},cats:['@lady0'],channel:'any',fcy:'any',mpd:4,pools:['ladyA']}],
+  rules:[{label:'Bonus category',catNot:{entertainment:{re:STREAMING,why:'streaming subscriptions are not in Lady\'s Entertainment MCCs (only bars 5813, cinemas 7832, ticketing 7922)'}},cats:['@lady0'],channel:'any',fcy:'any',mpd:6,pools:['ladyA']}],
   zeroCats:['insurance','bills'],
   info:{fee:'S$196.20 (first year free); waivable on request',expiry:'UNI$: 24-27 months',conversion:'5,000 UNI$ = 10,000 KrisFlyer miles; S$27 per transfer; UNI$ pool with UOB PRVI Miles',
    blocks:'Base 1X: per txn rounded down to S$5. Bonus 9X: sum of the month\'s eligible spend rounded down to S$5 once (so small txns still count)',
-   exclusions:'ONE bonus category (chosen each quarter in the UOB TMRW app): Beauty & Wellness, Dining, Entertainment, Family, Fashion, Transport or Travel. Dining MCCs 5811, 5812, 5814, 5499. Entertainment = bars 5813, cinemas 7832, ticketing 7922 only (no streaming). Works online or in-store, SGD or FCY. Amaze, PayPal, education, govt, insurance, utilities excluded.',
-   notes:'Regular Lady\'s Card (Classic/Platinum/World Mastercard): 4 mpd on ONE chosen category, capped at S$1,000 per calendar month (posting date). Set your category in Cards → Details. If you actually hold the Lady\'s SOLITAIRE (2 categories, S$750 each), tell whoever set this up - the rules differ.',
+   exclusions:'6 mpd assumes the S$10k Lady\'s Savings Account balance is kept. ONE bonus category (chosen each quarter in the UOB TMRW app): Beauty & Wellness, Dining, Entertainment, Family, Fashion, Transport or Travel. Dining MCCs 5811, 5812, 5814, 5499. Entertainment = bars 5813, cinemas 7832, ticketing 7922 only (no streaming). Works online or in-store, SGD or FCY. Amaze, PayPal, education, govt, insurance, utilities excluded.',
+   notes:'Regular Lady\'s Card (Classic/Platinum/World Mastercard): 6 mpd on ONE chosen category = 10X UNI$ card rate (4 mpd) + 5X Lady\'s Savings Bonus UNI$ (needs S$10,000 monthly average balance in a UOB Lady\'s Savings Account; 10X/15X at S$50k/S$100k = 8/10 mpd). Card bonus AND savings bonus are each capped at S$1,000 of category spend per calendar month (posting date); above that 0.4 mpd. If the savings balance drops below S$10k that month, edit the rule back to 4 mpd. Set your category in Cards → Details. If you actually hold the Lady\'s SOLITAIRE (2 categories, S$750 each), tell whoever set this up - the rules differ.',
    source:ML+'/2026/08/18/review-uob-ladys-card-ladys-solitaire/',verify:['Which category you picked in the UOB TMRW app (default here: Dining)']}},
  {id:'dbs_wwmc',name:"DBS Woman's World Mastercard",bank:'DBS',baseLocal:0.4,baseFcy:1.2,block:1,cycle:'calendar',stmtDay:1,held:true,
   pools:{wwmc:{name:'Online',cap:1000}},
@@ -561,7 +561,7 @@ const ML_='https://milelion.com';
 /* ---- Card playbook (her cards) ---- */
 const PLAYBOOK={
  uob_lady:{title:"UOB Lady's Card (one bonus category)",
-  do:['Use for your chosen category (default Dining): 4 mpd online or in-store, any payment method, SGD or FCY.','Cap: S$1,000 per calendar month in that category, then 0.4 mpd.','Pick the category each quarter in the UOB TMRW app, and set the same one in Cards → Details so the app matches.','UNI$ pool with UOB PRVI Miles - one S$27 transfer fee covers both.'],
+  do:['Use for your chosen category (default Dining): 6 mpd online or in-store (4 mpd card rate + 2 mpd Lady\'s Savings bonus with S$10k balance), any payment method, SGD or FCY.','Cap: S$1,000 per calendar month in that category (card bonus and savings bonus both), then 0.4 mpd.','Keep at least S$10,000 average in the Lady\'s Savings Account every month, or that month earns only 4 mpd.','Pick the category each quarter in the UOB TMRW app, and set the same one in Cards → Details so the app matches.','UNI$ pool with UOB PRVI Miles - one S$27 transfer fee covers both.'],
   dont:['No UNI$ via PayPal or Amaze.','Streaming subscriptions do not count as Entertainment (only bars, cinemas, ticketing).','No bonus on insurance, utilities, education, government.'],
   src:ML_+'/2026/08/18/review-uob-ladys-card-ladys-solitaire/'},
  dbs_wwmc:{title:"DBS Woman's World Mastercard",
@@ -582,7 +582,7 @@ const PLAYBOOK={
   src:'https://www.citibank.com.sg/credit-cards/cashback/cashback-plus-card/'}
 };
 const GENERAL_TIPS=[
- {t:'4 mpd first, then the general cards',d:'Online → DBS Woman\'s World (S$1,000/month). Your Lady\'s category → UOB Lady\'s (S$1,000/month). Everything else → UOB PRVI Miles locally, PRVI or HSBC TravelOne overseas.'},
+ {t:'Bonus cards first, then the general cards',d:'Online → DBS Woman\'s World (S$1,000/month). Your Lady\'s category → UOB Lady\'s at 6 mpd (S$1,000/month). Everything else → UOB PRVI Miles locally, PRVI or HSBC TravelOne overseas.'},
  {t:'Miles vs cash back',d:'Citi Cash Back+ pays 1.6% cash. The app compares it with miles at your value per mile (default 1.5 cents) - change it in More → Backup & settings.'},
  {t:'Check the MCC before big purchases',d:'Bonuses follow the merchant category code. Look it up in HeyMax (MCC lookup) before paying.'},
  {t:'Use the home-screen nudges',d:'They show how much 4 mpd room is left on each card.'},
@@ -626,18 +626,18 @@ const SAVE_APPS=[
   how:'Collect vouchers in-app → go back to HeyMax/ShopBack → open product → checkout.',
   src:['https://help.heymax.ai/en/articles/10973627-shop-earn-miles-for-shopee-lazada-for-sg-users']},
  {id:'dining_apps',name:'Chope / Burpple / Fave',icon:'🍽️',what:'Dining deals: Chope reservations & deals, Burpple Beyond 1-for-1 (paid membership), FavePay merchant cashback (locked to that merchant, expires).',
-  stack:'Pay the restaurant with UOB Lady\'s (Dining) - it pays 4 mpd on any payment method. Only pay for Burpple Beyond if you use 1-for-1 often.',
+  stack:'Pay the restaurant with UOB Lady\'s (Dining) - it pays 6 mpd on any payment method. Only pay for Burpple Beyond if you use 1-for-1 often.',
   how:'Check the app before booking; pay with Lady\'s.',
   src:['https://www.burpple.com/beyond','https://www.misslobang.com/article/best-cashback-apps-singapore-2026'],verify:'Burpple Beyond pricing, Chope-Dollars rate and Fave cashback terms not confirmed from official pages.'}
 ];
 /* per category: which app to open first, and the line shown after saving */
 const SAVE_BY_CAT={
- dining:{apps:['krisplus','dining_apps','heymax'],tip:'Restaurant on Kris+? Pay in Kris+ for extra KrisPay miles (8 mpd at Birthday Bash merchants till 31 Oct) - Lady\'s still earns 4 mpd.'},
+ dining:{apps:['krisplus','dining_apps','heymax'],tip:'Restaurant on Kris+? Pay in Kris+ for extra KrisPay miles (8 mpd at Birthday Bash merchants till 31 Oct) - Lady\'s still earns 6 mpd.'},
  groceries:{apps:['ntuc','heymax'],tip:'Scan FairPrice/Link app for Linkpoints, then pay with UOB PRVI Miles. Or buy FairPrice/Sheng Siong vouchers on HeyMax.'},
  shopping:{apps:['heymax','shopback','platform'],tip:'Start from HeyMax "Shop with Max" or ShopBack before checkout for Max Miles/cashback on top of your card.'},
  transport:{apps:['grab','heymax'],tip:'Grab rides earn GrabCoins on top of card miles. Buying Grab vouchers on HeyMax adds Max Miles.'},
  travel:{apps:['heymax','shopback','krisplus'],tip:'Book Agoda/Trip.com/Booking.com via HeyMax or ShopBack, pay with DBS WWMC (4 mpd online incl. travel).'},
- entertainment:{apps:['heymax','krisplus'],tip:'Golden Village vouchers are on HeyMax; cinema/ticketing paid directly earns 4 mpd on Lady\'s.'},
+ entertainment:{apps:['heymax','krisplus'],tip:'Golden Village vouchers are on HeyMax; cinema/ticketing paid directly earns 6 mpd on Lady\'s if Entertainment is your category.'},
  fcy:{apps:['krisplus'],tip:'Overseas: UOB PRVI Miles (2.4 mpd, 3 mpd in IDR/MYR/THB/VND) or HSBC TravelOne (2.4 mpd, Asia Miles rate). Online FCY: DBS WWMC 4 mpd within its cap.'},
  contactless:{apps:['shopback','heymax'],tip:'UOB PRVI Miles 1.4 mpd. For big shops, a HeyMax voucher may add Max Miles.'},
  bills:{apps:['cardup'],tip:'Bills earn no bonus on your cards. CardUp/Citi PayAll only if ~1.6-2 cents per mile is worth it.'},
@@ -666,7 +666,7 @@ const WALLET_ROWS=[
  {id:'ap_store',name:'Apple/Google/Samsung Pay - tap in store'},{id:'ap_app',name:'Apple/Google Pay - inside an app / website'},{id:'paypal',name:'PayPal (goods purchase)'},
  {id:'grabpay',name:'GrabPay wallet (top-up)'},{id:'grabcard',name:'Grab with the card saved in Grab'},{id:'amaze',name:'Amaze (card linked)'},{id:'shopbackpay',name:'ShopBack Pay'},{id:'krisplus',name:'Kris+ (pays in-app)'}];
 const WALLETS={
- uob_lady:{ap_store:['yes','any payment method for your category'],ap_app:['yes','any channel, MCC-based'],paypal:['no','T&C cl. 35: "PAYPAL*" earns no UNI$'],grabpay:['no','prepaid top-ups excluded'],grabcard:['yes','GrabFood codes as dining 5814 (verify)'],amaze:['no','"AMAZE*" excluded'],shopbackpay:['verify','MCC-dependent'],krisplus:['yes','MCC retained - your category earns 4 mpd']},
+ uob_lady:{ap_store:['yes','any payment method for your category'],ap_app:['yes','any channel, MCC-based'],paypal:['no','T&C cl. 35: "PAYPAL*" earns no UNI$'],grabpay:['no','prepaid top-ups excluded'],grabcard:['yes','GrabFood codes as dining 5814 (verify)'],amaze:['no','"AMAZE*" excluded'],shopbackpay:['verify','MCC-dependent'],krisplus:['yes','MCC retained - your category earns 6 mpd']},
  dbs_wwmc:{ap_store:['base','in-store is not online - 0.4 mpd'],ap_app:['yes','in-app counts as online'],paypal:['yes','only crypto/forex PAYPAL descriptors excluded'],grabpay:['no','e-wallet loads excluded'],grabcard:['yes','online 4 mpd'],amaze:['no','AMAZE listed in exclusions'],shopbackpay:['yes','online'],krisplus:['yes','online 4 mpd']},
  hsbc_t1:{ap_store:['yes','flat rate'],ap_app:['yes','flat rate'],paypal:['verify','HSBC excludes money transfers incl. PayPal on Revolution - assumed 0'],grabpay:['no','e-wallet top-ups excluded'],grabcard:['yes','flat rate'],amaze:['verify','not confirmed'],shopbackpay:['yes','flat rate'],krisplus:['yes','flat rate']},
  uob_prvi:{ap_store:['yes','base 1.4 mpd'],ap_app:['yes','base 1.4 mpd'],paypal:['verify','base unless an excluded PAYPAL* descriptor'],grabpay:['no','top-ups excluded'],grabcard:['yes','1.4 mpd'],amaze:['no','"AMAZE*" excluded'],shopbackpay:['yes','1.4 mpd'],krisplus:['yes','1.4 mpd']},
@@ -1409,10 +1409,11 @@ function viewData(){
    <li>Bonus mpd is the total rate (base + bonus). Earning blocks: UOB rounds down to S$5, Citi/HSBC/DBS to S$1 (DBS S$5 for base). HSBC and Lady's bonus are worked out on the exact amount.</li>
    <li>Caps reset per calendar month (DBS WWMC by transaction date; UOB Lady's by posting date). HSBC TravelOne, UOB PRVI Miles and Citi Cash Back+ have no cap. The exact T&C clauses are in Cards → Details.</li>
    <li><b>Pay with</b> changes eligibility: PayPal earns nothing on UOB Lady's; UOB and DBS earn nothing via Amaze; a GrabPay wallet top-up earns nothing anywhere. See Card playbook → Wallets.</li>
+   <li><b>UOB Lady's 6 mpd</b> = 4 mpd card rate + 2 mpd Lady's Savings bonus (needs S$10,000 monthly average balance in a UOB Lady's Savings Account). Both are capped at S$1,000 of category spend per calendar month. If you don't keep the balance, set the rule to 4 mpd in Cards → Details.</li>
    <li><b>Cash back vs miles:</b> Citi Cash Back+ earns 1.6% cash (no cap). To rank it against miles cards the app converts cash back to mile-equivalents at your value per mile (default 1.5¢, set above): S$1.60 ≈ 107 miles.</li>
       <li>Category ≠ MCC. Banks pay bonuses by merchant category code, and the app maps categories to typical MCCs. Bills/insurance earn no bonus (UOB/HSBC earn 0 on them).</li>
    <li>Bank transfer / PayNow / Cash entries earn 0 miles and are ignored for caps, minimum spend, recommendations, effective mpd and miles missed. They only count in Expenses.</li>
-   <li>Not modelled in miles totals: welcome offers, Kris+/HeyMax/ShopBack extras (see Save more), UOB Lady's Savings boost, the Citi Plus +0.4% cash-back bonus, FCY fees (≈3.25%).</li></ul></div>`;
+   <li>Not modelled in miles totals: welcome offers, Kris+/HeyMax/ShopBack extras (see Save more), the Citi Plus +0.4% cash-back bonus, FCY fees (≈3.25%).</li></ul></div>`;
 }
 function exportJson(){ const blob=new Blob([JSON.stringify(S,null,1)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='miles-tracker-backup-'+today()+'.json'; document.body.appendChild(a); a.click(); a.remove(); toast('Exported'); }
 function importFile(f){ if(!f) return; const rd=new FileReader(); rd.onload=()=>{ try{ const o=JSON.parse(rd.result); if(!o.cards||!o.txs) throw new Error('Not a tracker backup'); if(!confirm(`Import ${o.txs.length} transactions and ${o.cards.length} cards? This replaces current data.`)) return; S=migrateState(o); setKfMode(S.settings.kf!==false); setCpm(S.settings.cpm); const n=applyRecurring(S,today()); save(); toast('Imported'+(n?` (+${n} recurring)`:'')); render(); }catch(e){ alert('Import failed: '+e.message); } }; rd.readAsText(f); }
@@ -1591,7 +1592,7 @@ function walletsHtml(hs){ const ids=hs.map(c=>c.id).filter(id=>WALLETS[id]);
    <div class="sub">✅ bonus · ➖ base rate only · ❌ earns nothing / excluded · ⛔ not possible · ❓ unverified. Checked ${esc(CONTENT_CHECKED)}. Tap a row for the reason.</div>
    ${WALLET_ROWS.map(w=>`<details class="wrow"><summary><b>${esc(w.name)}</b><div class="wchips">${ids.map(id=>{ const v=WALLETS[id][w.id]||['verify','']; const m=WMARK[v[0]]||WMARK.verify; return `<span class="wc ${m[1]}">${m[0]} ${esc(short(cardById(id).name).replace(/^(UOB|Citi|DBS|HSBC) /,''))}</span>`; }).join('')}</div></summary>
      <ul class="sub">${ids.map(id=>{ const v=WALLETS[id][w.id]||['verify','not checked']; return `<li><b>${esc(short(cardById(id).name))}:</b> ${(WMARK[v[0]]||WMARK.verify)[0]} ${esc(v[1])}${v[0]==='verify'?' <span class="vf">verify</span>':''}</li>`; }).join('')}</ul></details>`).join('')}
-   <div class="sub" style="margin-top:6px"><b>Rules of thumb:</b> DBS WWMC only pays 4 mpd online/in-app; UOB Lady's pays 4 mpd on your category with any payment method (not PayPal); save the card itself in Grab instead of topping up GrabPay. In Add, “Pay with” applies these rules automatically.</div>
+   <div class="sub" style="margin-top:6px"><b>Rules of thumb:</b> DBS WWMC only pays 4 mpd online/in-app; UOB Lady's pays 6 mpd on your category with any payment method (not PayPal); save the card itself in Grab instead of topping up GrabPay. In Add, “Pay with” applies these rules automatically.</div>
    <div class="sub">Sources: ${WALLET_SOURCES.map(([t,u],k)=>`<a href="${esc(u)}" target="_blank" rel="noopener" title="${esc(t)}">${k+1}. ${esc(t)}</a>`).join(' · ')}</div></div>`; }
 
 /* ---------- Cloud sync (private GitHub repo) ---------- */

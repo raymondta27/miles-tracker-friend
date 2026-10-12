@@ -42,7 +42,7 @@ You need a free GitHub account (github.com → Sign up). Send Raymond your **Git
 On first launch it walks you through a short setup: your 5 cards (all ticked), optional annual-fee months and optional budgets. It starts **empty**, with no sample data.
 
 Two settings are worth checking once:
-- **Cards → UOB Lady's Card → Details**: choose the same bonus category you picked in the UOB TMRW app (the default is Dining).
+- **Cards → UOB Lady's Card → Details**: choose the same bonus category you picked in the UOB TMRW app (the default is Dining). The app counts 6 mpd there, which assumes you keep S$10,000+ in a UOB Lady's Savings Account. If you don't, change the rule's mpd to 4 in the same screen.
 - **More → Backup & settings → Value of 1 mile**: the default is 1.5 cents. The app uses it to decide whether Citi Cash Back+ (1.6% cash) or a miles card wins. At 1.5 cents, a card has to earn more than about 1.07 miles per dollar to beat the cash back.
 
 ## 4. Keep a backup in your own private repo (optional, recommended)
@@ -89,7 +89,7 @@ Rent, PayNow and cash can be logged too (Paid by → Bank transfer / PayNow / Ca
 
 | Card | Earn | Cap |
 |---|---|---|
-| UOB Lady's Card | 4 mpd on 1 chosen category (any channel); 0.4 mpd otherwise | S$1,000 / calendar month |
+| UOB Lady's Card | 6 mpd on 1 chosen category (any channel) = 4 mpd card + 2 mpd Lady's Savings bonus (needs S$10k average balance in a UOB Lady's Savings Account); 0.4 mpd otherwise | S$1,000 / calendar month (applies to both parts) |
 | DBS Woman's World MC | 4 mpd online / in-app; 0.4 local, 1.2 FCY otherwise | S$1,000 / calendar month |
 | HSBC TravelOne | 1.2 mpd local, 2.4 mpd FCY (1.0 / 2.0 if converted to KrisFlyer) | none |
 | UOB PRVI Miles | 1.4 mpd local, 2.4 FCY, 3 in IDR/MYR/THB/VND | none |
